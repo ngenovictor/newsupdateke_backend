@@ -1,1 +1,3 @@
 newsupdateke/local_settings.py
+*.pyc
+__pycache__
