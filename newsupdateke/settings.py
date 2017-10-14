@@ -117,4 +117,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+try:
+    from local_settings import *
+    # define local dev settings
+    STATIC_URL = '/static/'
+except ImportError:
+    # define production settings
