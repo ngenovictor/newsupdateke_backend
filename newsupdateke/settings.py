@@ -20,10 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'hidden create yours'
+# SECRET_KEY = 'hidden_create_yours'
+# check out https://djskgen.herokuapp.com/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['localhost:8000']
 
@@ -37,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -118,8 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 try:
-    from local_settings import *
+    from .local_settings import SECRET_KEY, DATABASES
+    SECRET_KEY = SECRET_KEY
+    DATABASES = DATABASES
     # define local dev settings
+    DEBUG = True
     STATIC_URL = '/static/'
 except ImportError:
     # define production settings
+    DEBUG = False
